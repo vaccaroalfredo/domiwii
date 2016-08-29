@@ -35,7 +35,7 @@ public class AbstractDao<T> {
 		
 		public void openTransaction(){
 			if (this.session==null){
-				this.openSession();
+				this.openSession(); 
 				this.setTransaction(this.getSession().beginTransaction());
 			}
 		}
