@@ -1,0 +1,97 @@
+/*Customize titlebar color*/
+.ui-jqgrid .ui-jqgrid-titlebar {
+    border-bottom: 1px solid #ddd;
+    color: #ffffff;
+    font-weight: normal;
+    margin-right: 2px;
+    min-height: 37px;
+    padding: 4px 8px;
+    position: relative;
+    font-size: 20px;
+    background-color: #237FB6;
+}
+/*Customize text color for element in table jqgrid*/
+.ui-jqgrid tr.ui-row-ltr td {
+	 color: #555;
+}
+
+/*Customize color on selected row*/
+.table > thead > tr > td.success,
+.table > tbody > tr > td.success,
+.table > tfoot > tr > td.success,
+.table > thead > tr > th.success,
+.table > tbody > tr > th.success,
+.table > tfoot > tr > th.success,
+.table > thead > tr.success > td,
+.table > tbody > tr.success > td,
+.table > tfoot > tr.success > td,
+.table > thead > tr.success > th,
+.table > tbody > tr.success > th,
+.table > tfoot > tr.success > th {
+    background-color: #afdeed;  
+}
+/*Customize table content not scrollbar horinzontal*/
+.ui-jqgrid .ui-jqgrid-bdiv {
+	  position: relative; 
+	  margin: 0em; 
+	  padding:0; 
+	  /*overflow: auto;*/ 
+	  overflow-x:hidden; 
+	  overflow-y:auto; 
+	  /*text-align:left;*/
+}
+
+.labelresult-ok {
+    background-color: #27c24c;
+}
+.labelresult-ko {
+   background-color: #f05050;
+   
+}
+.labelcolored {
+    border-radius: 0.25em;
+    color: #fff;
+    display: block;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0.2em 0.6em 0.3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.text-center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.hourglass{
+	padding-right: 10px;
+}
+/*Customize autocomplete*/
+.ui-autocomplete {
+    position: absolute;
+    z-index: 1000;
+    cursor: default;
+    padding: 0;
+    margin-top: 2px;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+       -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.ui-autocomplete > li {
+  padding: 3px 20px;
+}
+.ui-autocomplete > li.ui-state-focus {
+  background-color: #DDD;
+}
+.ui-helper-hidden-accessible {
+  display: none;
+}

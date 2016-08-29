@@ -1,0 +1,68 @@
+#body {
+	background-color: #E9E9E9;
+	
+}
+
+div#i {
+    height: 35px;
+    margin-top: 20px;
+    width: 660px;
+}
+div#navigation ul {
+    margin: 0;
+    padding: 0;
+}
+div#navigation li {
+    float: left;
+    margin: 0 3px 0 0;
+    padding: 0;
+}
+div#navigation a {
+    background: rgba(0, 0, 0, 0) url("sfondocombinato.jpg") no-repeat scroll left top;
+    border: medium none #666;
+    color: #333;
+    display: block;
+    font-variant: small-caps;
+    line-height: 30px;
+    text-decoration: none;
+    text-indent: 27px;
+    width: 120px;
+}
+div#navigation a:hover {
+    background-position: -130px 0;
+    color: #336;
+}
+
+/* l#menu { */
+/*     font-family: Verdana, sans-serif; */
+/*     font-size: 11px; */
+/*     margin: 0; */
+/*     padding: 0; */
+/*     list-style: none; */
+/* } */
+  
+/* ul#menu li { */
+/*     background-color: #2E90BD; #FF831C; */
+/*     border-bottom: 5px solid #54BAE2; */
+/*     display: block; */
+/*     width: 150px; */
+/*     height: 30px; */
+/*     margin: 2px; */
+/*     float: left; elementi su singola riga */
+/* } */
+  
+/* ul#menu li a { */
+/*     color: #fff; */
+/*     display: block; */
+/*     font-weight: bold; */
+/*     line-height: 30px; */
+/*     text-decoration: none; */
+/*     width: 150px; */
+/*     height: 30px; */
+/*     text-align: center; */
+/* } */
+  
+/* ul#menu li.active, ul#menu li:hover { */
+/*     background-color: #54bae2;#54BAE2; */
+/*     border-bottom: 5px solid #FF831C; */
+/* } */
