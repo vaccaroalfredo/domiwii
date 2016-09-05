@@ -18,7 +18,7 @@ public class AbstractDao<T> {
 	    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	    private Session session;
 	    private Transaction transaction;
-	    private boolean concludeoperation; 
+	    private boolean concludeoperation;
 	    
 	    
 		public AbstractDao() {
@@ -35,7 +35,7 @@ public class AbstractDao<T> {
 		
 		public void openTransaction(){
 			if (this.session==null){
-				this.openSession(); 
+				this.openSession();
 				this.setTransaction(this.getSession().beginTransaction());
 			}
 		}

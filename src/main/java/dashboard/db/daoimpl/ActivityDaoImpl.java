@@ -20,7 +20,6 @@ import dashboard.db.jpa.Activity;
 public class ActivityDaoImpl extends AbstractDao<Activity> implements ActivityDao{
 	
 	
-	
 
 	public ActivityDaoImpl() {
 		super();

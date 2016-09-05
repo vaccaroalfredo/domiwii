@@ -9,8 +9,11 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.search.Search;*/
 import org.hibernate.service.ServiceRegistry;
 
+import dashboard.db.jpa.Action;
 import dashboard.db.jpa.Activity;
+import dashboard.db.jpa.Device;
 import dashboard.db.jpa.Note;
+import dashboard.db.jpa.Scheduler;
 import dashboard.db.jpa.Setting;
 import dashboard.db.jpa.User;
 
@@ -33,6 +36,10 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Activity.class);
                 configuration.addAnnotatedClass(Setting.class);
                 configuration.addAnnotatedClass(Note.class);
+                configuration.addAnnotatedClass(Device.class);
+                configuration.addAnnotatedClass(Action.class);
+                
+                configuration.addAnnotatedClass(Scheduler.class);
                 ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();    
                 sessionFactory = configuration.buildSessionFactory(sr);
                 /*Session session=sessionFactory.openSession();
