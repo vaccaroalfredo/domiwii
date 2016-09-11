@@ -10,7 +10,7 @@ public class BotAction implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 //	private String devId;
-	private String mode;
+	private String mode = "0";
 	private String status;
 	private String temperature;
 	private String speed;
@@ -27,11 +27,7 @@ public class BotAction implements Serializable{
 		this.confort = confort;
 		this.alias = alias;
 		
-		if (mode.equalsIgnoreCase("0")) {
-			this.status = "0";
-		}else{
-			this.status = "1";
-		}
+		
 		
 		
 	}
@@ -75,6 +71,11 @@ public class BotAction implements Serializable{
 		this.alias = alias;
 	}
 	public String getStatus() {
+		if (this.mode.equalsIgnoreCase("0")) {
+			this.status = "0";
+		}else{
+			this.status = "1";
+		}
 		return status;
 	}
 	public void setStatus(String status) {
