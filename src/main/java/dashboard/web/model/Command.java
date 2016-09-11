@@ -59,7 +59,7 @@ public class Command {
 
 			}
 
-			if (t >= this.MIN_TEMPERATURE && t <= this.MAX_TEMPERATURE || t == this.DEFAULT_VALUE ) {
+			if ((t >= this.MIN_TEMPERATURE && t <= this.MAX_TEMPERATURE) || t == this.DEFAULT_VALUE ) {
 
 				this.temperature = t;
 
@@ -68,14 +68,14 @@ public class Command {
 				error = true;
 
 			}
-			if (sp >= this.MIN_SPEED && sp <= this.MAX_SPEED || s == this.DEFAULT_VALUE ) {
+			if ((sp >= this.MIN_SPEED && sp <= this.MAX_SPEED) || s == this.DEFAULT_VALUE ) {
 
 				this.speed = sp;
 			} else {
 				error = true;
 
 			}
-			if (c >= this.MIN_CONFORT && c <= this.MAX_CONFORT || c == this.DEFAULT_VALUE ) {
+			if ((c >= this.MIN_CONFORT && c <= this.MAX_CONFORT) || c == this.DEFAULT_VALUE ) {
 
 				this.confort = c;
 
