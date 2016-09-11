@@ -2,6 +2,8 @@ package dashboard.web.controller;
 
 import java.io.Serializable;
 
+
+
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import dashboard.web.model.ArduinoMessage;
 import dashboard.web.model.BotAction;
 import dashboard.web.model.BotAuthentication;
 import dashboard.web.model.Command;
+import dashboard.web.model.Response;
 
 
 @RestController
@@ -36,7 +39,7 @@ public class BotController extends LoggerUtils {
 	 */
 
 	@RequestMapping(value = "/addBotAction", method = RequestMethod.POST)
-	public Boolean addBotAction(@RequestBody(required = false) BotAction act) {
+	public Response addBotAction(@RequestBody(required = false) BotAction act) {
 
 		this.debugMessage(logger, "addBotAction");
 
@@ -44,7 +47,7 @@ public class BotController extends LoggerUtils {
 		String devAlias = act.getAlias();
 		if (devAlias == null || devAlias.equalsIgnoreCase("")) {
 			
-			return false;
+			return new Response(String.valueOf(false)) ;
 			
 		}
 		
@@ -56,7 +59,7 @@ public class BotController extends LoggerUtils {
 			
 		} catch (Exception e) {
 			
-			return false;
+			return new Response(String.valueOf(false)) ;
 			
 		}
 		
@@ -72,7 +75,7 @@ public class BotController extends LoggerUtils {
 
 		if (dev == null) {
 
-			return false;
+			return new Response(String.valueOf(false)) ;
 
 		} else {
 
@@ -82,7 +85,7 @@ public class BotController extends LoggerUtils {
 
 		}
 
-		return true;// +params.getId();
+		return new Response(String.valueOf(true)) ;// +params.getId();
 	}
 
 	/*
@@ -93,14 +96,14 @@ public class BotController extends LoggerUtils {
 	 * "password": "password" }
 	 */
 	@RequestMapping(value = "/checkDevice", method = RequestMethod.POST)
-	public Boolean checkDevice(@RequestBody(required = false) BotAuthentication auth) {
+	public Response checkDevice(@RequestBody(required = false) BotAuthentication auth) {
 		boolean isAuthenticated = false;
 
 		DeviceService deviceService = (DeviceService) SpringApplicationContext.getServiceBean("deviceService");
 
 		isAuthenticated = deviceService.authDevice(auth.getAlias(), auth.getPassword());
 
-		return isAuthenticated;
+		return new Response(String.valueOf(isAuthenticated)) ;
 
 	}
 
