@@ -15,6 +15,7 @@ import dashboard.db.daoimpl.ActionDaoImpl;
 import dashboard.db.daoimpl.NoteDaoImpl;
 import dashboard.db.jpa.Action;
 import dashboard.db.jpa.Note;
+import dashboard.db.jpa.State;
 
 
 @Service("actionService")
@@ -98,6 +99,30 @@ public class ActionService {
 			logger.error("findNote",e);
 		}
 		return new ArrayList<Note>();
+	}
+
+	public boolean updateActionState(Action a) {
+		// TODO Auto-generated method stub
+		ActionDao actionDao = new ActionDaoImpl();
+		try{
+			return actionDao.updateActionState(a);
+		}catch(Exception e){
+			logger.error("findNote",e);
+		}
+		return false;
+		
+	}
+
+	public boolean updateActionState(Long aid, State s) {
+		
+		ActionDao actionDao = new ActionDaoImpl();
+		try{
+			return actionDao.updateActionState(aid,s);
+		}catch(Exception e){
+			logger.error("findNote",e);
+		}
+		return false;
+	
 	}
 	
  

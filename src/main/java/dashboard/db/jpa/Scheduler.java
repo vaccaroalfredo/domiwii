@@ -2,11 +2,13 @@ package dashboard.db.jpa;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,16 +22,14 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.GenerationTime;
 
 @Entity(name="Scheduler")
 @Access(AccessType.FIELD)
-//@Table(
-//		
-//		//uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})}
-//		
-//)
-
 @AssociationOverrides({
 	@AssociationOverride(name = "deviceActionId.action",
 		joinColumns = @JoinColumn(name = "idAction")),
@@ -37,7 +37,13 @@ import javax.persistence.UniqueConstraint;
 		joinColumns = @JoinColumn(name = "idDevice")) })
 public class Scheduler {
 	
-	private String name;	
+	private String name;
+	
+	
+	@Column( nullable = false ) 
+    @Temporal( value = TemporalType.TIMESTAMP ) 
+    //@org.hibernate.annotations.Generated(value=GenerationTime.ALWAYS)
+	private Date creationdate = new Date();
 	
 	@EmbeddedId
 	private DeviceActionId deviceActionId = new DeviceActionId();
@@ -97,6 +103,14 @@ public class Scheduler {
 		this.deviceActionId.setDevice(device);
 	}
 
+	public Date getCreationdate() {
+		return creationdate;
+	}
+
+	public void setCreationdate(Date creationdate) {
+		this.creationdate = creationdate;
+	}
+
 
 
 	
@@ -114,24 +128,24 @@ public class Scheduler {
 //		return this.getDeviceActionId().getDevice();
 //	}
 	
-//	public boolean equals(Object o) {
-//		if (this == o)
-//			return true;
-//		if (o == null || getClass() != o.getClass())
-//			return false;
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Scheduler that = (Scheduler) o;
+
+		if (getDeviceActionId() != null ? !getDeviceActionId().equals(that.getDeviceActionId())
+				: that.getDeviceActionId() != null)
+			return false;
+
+		return true;
+	}
 //
-//		Scheduler that = (Scheduler) o;
-//
-//		if (getDeviceActionId() != null ? !getDeviceActionId().equals(that.getDeviceActionId())
-//				: that.getDeviceActionId() != null)
-//			return false;
-//
-//		return true;
-//	}
-//
-//	public int hashCode() {
-//		return (getDeviceActionId() != null ? getDeviceActionId().hashCode() : 0);
-//	}
+	public int hashCode() {
+		return (getDeviceActionId() != null ? getDeviceActionId().hashCode() : 0);
+	}
 	
 
 }

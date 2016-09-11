@@ -1,6 +1,7 @@
 package dashboard.db.jpa;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +21,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+/**
+ * @author Rinaldo
+ *
+ */
 @Entity(name="Action")
 @Access(AccessType.FIELD)
 @Table(
@@ -31,6 +36,9 @@ public class Action implements Serializable {
 	private String name; 
 	private String shortDescription;
 	private State state;
+	private String command;
+	
+	
 	
 	//@OneToMany(mappedBy="action")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "deviceActionId.action", cascade = CascadeType.ALL)
@@ -42,12 +50,13 @@ public class Action implements Serializable {
 	@Column(name = "idAction", unique = true, nullable = false)
 	private Long id;
 	
-	public Action(String name, String description, State state) {
+	public Action(String name, String description, String command, State state) {
 		
 		super();
 		this.setName(name);
 		this.setShortDescription(description);
 		this.setState(state);
+		this.command = command;
 		
 	}
 //	public Action(String name, String description, State state, List<Scheduler> scheduler ) {
@@ -102,6 +111,14 @@ public class Action implements Serializable {
 
 	public void setScheduler(List<Scheduler> scheduler) {
 		this.scheduler = scheduler;
+	}
+	
+	public String getCommand() {
+		return command;
+	}
+	
+	public void setCommand(String command) {
+		this.command = command;
 	}
 	
 	

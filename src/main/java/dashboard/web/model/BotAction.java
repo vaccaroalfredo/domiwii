@@ -2,37 +2,54 @@ package dashboard.web.model;
 
 import java.io.Serializable;
 
-public class BotAction implements Serializable{
 	
+public class BotAction implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String devId;
+//	private String devId;
 	private String mode;
+	private String status;
 	private String temperature;
 	private String speed;
+	private String confort;
+	private String alias;
 	
 	
-	public BotAction(String devId, String mode, String temperature, String speed) {
+	public BotAction(String mode, String temperature, String speed, String confort,String alias) {
 		super();
-		this.devId = devId;
+//		this.devId = devId;
 		this.mode = mode;
 		this.temperature = temperature;
 		this.speed = speed;
+		this.confort = confort;
+		this.alias = alias;
+		
+		if (mode.equalsIgnoreCase("0")) {
+			this.status = "0";
+		}else{
+			this.status = "1";
+		}
+		
+		
+	}
+	public String getConfort() {
+		return confort;
+	}
+	public void setConfort(String confort) {
+		this.confort = confort;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public BotAction() {
 		super();
 		
 	}
 	
-	public String getDevId() {
-		return devId;
-	}
-	public void setDevId(String devId) {
-		this.devId = devId;
-	}
+	
 	public String getMode() {
 		return mode;
 	}
@@ -50,6 +67,18 @@ public class BotAction implements Serializable{
 	}
 	public void setSpeed(String speed) {
 		this.speed = speed;
+	}
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

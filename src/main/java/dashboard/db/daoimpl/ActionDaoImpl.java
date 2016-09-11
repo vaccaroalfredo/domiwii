@@ -12,20 +12,21 @@ import dashboard.db.dao.DeviceDao;
 import dashboard.db.jpa.Action;
 import dashboard.db.jpa.Device;
 import dashboard.db.jpa.Note;
+import dashboard.db.jpa.State;
 
-public class ActionDaoImpl extends AbstractDao<Action> implements ActionDao  {
+public class ActionDaoImpl extends AbstractDao<Action> implements ActionDao {
 
 	@Override
 	public Long addAction(Action action) {
 		Long idaction = null;
-		try{
+		try {
 			this.openTransaction();
 			this.persist(action);
 			idaction = action.getId();
-			System.out.println("Inserita action "+idaction);
-		}catch(Exception e){
+			System.out.println("Inserita action " + idaction);
+		} catch (Exception e) {
 			this.closeTransaction(false);
-		}finally{
+		} finally {
 			this.closeTransaction(true);
 		}
 		return idaction;
@@ -34,30 +35,30 @@ public class ActionDaoImpl extends AbstractDao<Action> implements ActionDao  {
 	@Override
 	public Action getActionById(Long id) {
 		// TODO Auto-generated method stub
-		Action action=null;
-		try{
+		Action action = null;
+		try {
 			this.openTransaction();
 			action = this.get(Action.class, id);
-		}catch(Exception e){
+		} catch (Exception e) {
 			this.closeTransaction(false);
-		}finally{
+		} finally {
 			this.closeTransaction(true);
 		}
 		return action;
-		
+
 	}
 
-//	@Override
-//	public Action getActionByDeviceId(Long idDevice) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// @Override
+	// public Action getActionByDeviceId(Long idDevice) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
-//	@Override
-//	public List<Action> getActionsByDeviceId(String idDevice) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// @Override
+	// public List<Action> getActionsByDeviceId(String idDevice) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
 	@Override
 	public List<Action> getActions() {
@@ -73,18 +74,66 @@ public class ActionDaoImpl extends AbstractDao<Action> implements ActionDao  {
 
 	@Override
 	public boolean deleteAction(Long id) {
-		boolean ok=false;
-		try{
+		boolean ok = false;
+		try {
 			this.openTransaction();
-			this.delete(Action.class,id);
-			ok=true;
-		}catch(Exception e){
+			this.delete(Action.class, id);
+			ok = true;
+		} catch (Exception e) {
 			this.closeTransaction(ok);
-		}finally{
+		} finally {
 			this.closeTransaction(ok);
 		}
 		return ok;
 	}
 
-	
+	@Override
+	public boolean updateActionState(Action a) {
+
+		boolean ok = false;
+
+		Action actionDB = this.getActionById(a.getId());
+
+		if (actionDB == null) {
+			return false;
+		}
+
+		actionDB.setState(a.getState());
+
+		try {
+			this.openTransaction();
+			this.saveOrUpdate(actionDB);
+			ok = true;
+		} catch (Exception e) {
+			this.closeTransaction(ok);
+		} finally {
+			this.closeTransaction(ok);
+		}
+		return ok;
+	}
+
+	@Override
+	public boolean updateActionState(Long aid, State s) {
+		boolean ok = false;
+
+		Action actionDB = this.getActionById(aid);
+
+		if (actionDB == null) {
+			return false;
+		}
+
+		actionDB.setState(s);
+
+		try {
+			this.openTransaction();
+			this.saveOrUpdate(actionDB);
+			ok = true;
+		} catch (Exception e) {
+			this.closeTransaction(ok);
+		} finally {
+			this.closeTransaction(ok);
+		}
+		return ok;
+	}
+
 }

@@ -16,6 +16,7 @@ import dashboard.db.daoimpl.SchedulerDaoImpl;
 import dashboard.db.jpa.Action;
 import dashboard.db.jpa.Device;
 import dashboard.db.jpa.Note;
+import dashboard.db.jpa.Scheduler;
 
 
 
@@ -32,14 +33,18 @@ public class SchedulerService {
 		
 	}
 	
-	public Action getActionByDeviceId(Long iddevice){
-//		logger.debug("DEBUG--SERVICE--getNote");
-//		Scheduler dao = new NoteDaoImpl();
-//		try{
-//			return dao.getNoteByID(idnote); 
-//		}catch(Exception e){
-//			logger.error("getNote",e);
-//		}
+	public Action getActionByDeviceId(String iddevice){
+		logger.debug("DEBUG--SERVICE--getActionByDeviceId");
+		
+		SchedulerDao dao = new SchedulerDaoImpl();
+		
+		try{
+			return dao.getActionByDeviceID(iddevice); 
+		}catch(Exception e){
+			logger.error("getNote",e);
+		}
+		
+		
 		return null;
 	}
 
@@ -79,6 +84,15 @@ public class SchedulerService {
 		return false;
 	}
 	
+	
+	public Action getWaitingActionByDeviceId(String idDevice){
+		
+		SchedulerDao dao = new SchedulerDaoImpl();
+		
+		Action a = dao.getWaitingActionByDeviceID(idDevice);
+		
+		return a;
+	}
 	
 //	public List<Note> findNote(String description, Date startdate,Date enddate,Boolean highlights,Boolean archive){
 //		logger.debug("DEBUG--SERVICE--findNote ");

@@ -20,6 +20,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import dashboard.db.ASDataFormat;
+
 @Entity(name="Device")
 @Access(AccessType.FIELD)
 @Table(
@@ -39,6 +41,11 @@ public class Device implements Serializable {
 	@SequenceGenerator(name="seq_gen", sequenceName="device_seq",allocationSize = 1,initialValue=1)	
 	@Column(name = "idDevice", unique = true, nullable = false)
 	private Long id;
+	@Column(name = "alias", unique = true, nullable = false)
+	private String alias;
+	private String password;
+	private String temperature;
+	private String humidity;
 	
 //	public Device(String uid, List<Scheduler> scheduler) {
 //		
@@ -47,11 +54,15 @@ public class Device implements Serializable {
 //		this.scheduler= scheduler;
 //		
 //	}
-	public Device(String uid) {
+	public Device(String uid,String alias,String password, String temperature, String humidity) {
 		
 		super();
 		this.uid = uid;
-		
+		this.password = password;
+		this.alias = alias;
+		this.temperature = temperature;
+		this.humidity = humidity;
+					
 		
 	}
 	
@@ -84,6 +95,50 @@ public class Device implements Serializable {
 		this.scheduler = scheduler;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+	public String getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(String temperature) {
+		this.temperature = temperature;
+	}
+
+	public String getHumidity() {
+		return humidity;
+	}
+
+	public void setHumidity(String humidity) {
+		this.humidity = humidity;
+	}
+	
+	public String getPasswordEncrypt(){
+		return ASDataFormat.sha256(this.getPassword());
+	}
+	
+	public void setPasswordEncrypt(){
+		this.password= ASDataFormat.sha256(this.getPassword());
+	}
+	
+	public static String getPasswordEncrypt(String password){
+		return ASDataFormat.sha256(password);
+	}
 	
 
 }

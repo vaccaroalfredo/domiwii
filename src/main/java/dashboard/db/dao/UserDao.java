@@ -6,6 +6,7 @@ import dashboard.db.jpa.Activity;
 import dashboard.db.jpa.User;
 
 public interface UserDao {
+	
 	public Long addUser(User user);
     public User getUser(String username,String password);
     public List<String> getUserByName(String name);
@@ -15,4 +16,5 @@ public interface UserDao {
     public User getUserByID(Long id);
     public boolean deleteUser(Long iduser);
     public boolean  existsUser();
+    
 }

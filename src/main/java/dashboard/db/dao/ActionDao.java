@@ -3,6 +3,7 @@ package dashboard.db.dao;
 import java.util.List;
 
 import dashboard.db.jpa.Action;
+import dashboard.db.jpa.State;
 
 
 public interface ActionDao {
@@ -14,5 +15,7 @@ public interface ActionDao {
 	public List<Action> getActions();
 	public boolean existAction(String id);
 	public boolean deleteAction(Long id);
+	public boolean updateActionState(Action a);
+	public boolean updateActionState(Long aid, State s);
 
 }
