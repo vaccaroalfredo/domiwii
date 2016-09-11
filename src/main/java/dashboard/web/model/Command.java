@@ -19,6 +19,7 @@ public class Command {
 	final Integer MAX_CONFORT = 10;
 	final Integer MIN_MODE = 0;
 	final Integer MAX_MODE = 5;
+	final Integer DEFAULT_VALUE = -1;
 
 	public Command(Integer status, Integer mode, Integer temperature, Integer speed, Integer confort) {
 		super();
@@ -58,7 +59,7 @@ public class Command {
 
 			}
 
-			if (t >= this.MIN_TEMPERATURE && t <= this.MAX_TEMPERATURE) {
+			if (t >= this.MIN_TEMPERATURE && t <= this.MAX_TEMPERATURE || t == this.DEFAULT_VALUE ) {
 
 				this.temperature = t;
 
@@ -67,14 +68,14 @@ public class Command {
 				error = true;
 
 			}
-			if (sp >= this.MIN_SPEED && sp <= this.MAX_SPEED) {
+			if (sp >= this.MIN_SPEED && sp <= this.MAX_SPEED || s == this.DEFAULT_VALUE ) {
 
 				this.speed = sp;
 			} else {
 				error = true;
 
 			}
-			if (c >= this.MIN_CONFORT && c <= this.MAX_CONFORT) {
+			if (c >= this.MIN_CONFORT && c <= this.MAX_CONFORT || c == this.DEFAULT_VALUE ) {
 
 				this.confort = c;
 
