@@ -28,7 +28,7 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 			this.save(device);
 
 			iddevice = device.getId();
-
+  
 			System.out.println("Inserita device " + iddevice);
 
 		} catch (Exception e) {
