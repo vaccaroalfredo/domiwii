@@ -68,7 +68,7 @@ public class Command {
 				error = true;
 
 			}
-			if ((sp >= this.MIN_SPEED && sp <= this.MAX_SPEED) || s == this.DEFAULT_VALUE ) {
+			if ((sp >= this.MIN_SPEED && sp <= this.MAX_SPEED) || sp == this.DEFAULT_VALUE ) {
 
 				this.speed = sp;
 			} else {
@@ -147,8 +147,13 @@ public class Command {
 		
 		if ( this.status == 1 ) {
 			if (this.mode == 5){
+				String c = String.valueOf(this.confort);
+				if (c.length() == 2) {
+					toReturn = this.status+" "+this.mode+" "+c.charAt(0)+" "+c.charAt(1)+" "+0;
+				}else {
+					toReturn = this.status+" "+this.mode+" "+0+" "+c+" "+0;
+				}
 				
-				toReturn = this.status+" "+this.mode+" "+0+" "+0+" "+0;
 				
 			}else{
 				
