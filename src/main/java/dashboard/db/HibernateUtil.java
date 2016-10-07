@@ -11,6 +11,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import dashboard.db.jpa.Action;
 import dashboard.db.jpa.Activity;
+import dashboard.db.jpa.Conditioner;
 import dashboard.db.jpa.Device;
 import dashboard.db.jpa.Note;
 import dashboard.db.jpa.Scheduler;
@@ -38,6 +39,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Note.class);
                 configuration.addAnnotatedClass(Device.class);
                 configuration.addAnnotatedClass(Action.class);
+                configuration.addAnnotatedClass(Conditioner.class);
                 
                 configuration.addAnnotatedClass(Scheduler.class);
                 ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();    

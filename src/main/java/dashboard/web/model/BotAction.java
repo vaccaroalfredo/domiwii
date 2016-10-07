@@ -10,7 +10,7 @@ public class BotAction implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 //	private String devId;
-	private String mode = "0";
+	private String mode = "-1";
 	private String status;
 	private String temperature;
 	private String speed;

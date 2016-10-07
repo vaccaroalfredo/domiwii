@@ -18,10 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import dashboard.db.jpa.Activity;
+import dashboard.db.jpa.Scheduler;
 import dashboard.db.jpa.Setting;
 import dashboard.db.service.ActivityService;
+import dashboard.db.service.SchedulerService;
 import dashboard.db.service.SettingService;
 import dashboard.web.context.SpringApplicationContext;
+import dashboard.web.model.MonitorData;
 import dashboard.web.session.UserSessionInfo;
 import dashboard.web.view.ErrorFormView;
 import dashboard.web.view.ActivityFilterView;
@@ -44,16 +47,35 @@ public class ActivityController  extends LoggerUtils{
 	
 	
 	@RequestMapping(value="/monitor")
-	public @ResponseBody  List<Activity> monitor(HttpServletRequest request)
+	public @ResponseBody  List<MonitorData> monitor(HttpServletRequest request)
 	{	this.debugMessage(logger,"Url match with function monitor!!! ");
 		//UserSessionInfo info= (UserSessionInfo) request.getSession().getAttribute("userSessionInfo");
 	
 		int rows=(request.getParameter("rows")!=null) ? Integer.parseInt(request.getParameter("rows")):1;
 		if (rows>0){
-			ActivityService activityService = (ActivityService) SpringApplicationContext.getServiceBean("activityService");
-			return activityService.findActivityNotClosed();
+			
+			SchedulerService schedulerService = (SchedulerService) SpringApplicationContext.getServiceBean("schedulerService");
+			
+			List<Scheduler> scheduledActions = schedulerService.getAllScheduledAction();
+			
+			List<MonitorData> toReturn=  new ArrayList<MonitorData>();
+			
+			for (Scheduler scheduler : scheduledActions) {
+				
+				
+				MonitorData monitorData= new MonitorData();
+				monitorData.buildObjByScheduler(scheduler);
+				
+				toReturn.add(monitorData);
+				
+			}
+			
+		//	ActivityService activityService = (ActivityService) SpringApplicationContext.getServiceBean("activityService");
+		//	activityService.findActivityNotClosed();
+			
+			return toReturn;// activityService.findActivityNotClosed();
 		}else{
-			return new ArrayList<Activity>();
+			return new ArrayList<MonitorData>();
 		}
 	}
 	

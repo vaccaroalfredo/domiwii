@@ -28,7 +28,7 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 			this.save(device);
 
 			iddevice = device.getId();
-  
+
 			System.out.println("Inserita device " + iddevice);
 
 		} catch (Exception e) {
@@ -134,6 +134,24 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 		}
 
 		return null;
+
+	}
+	@Override
+	public List<Device> getDevicesByAlias(List<String> alias) {
+
+		List<Device> deviceList = null;
+		this.openTransaction();
+		Criteria cr = this.getSession().createCriteria(Device.class);
+		// cr = cr.setProjection(Projections.property("alias"));
+		cr = cr.add(Restrictions.in("alias", alias));
+		deviceList = cr.list();
+
+		this.closeTransaction(true);
+
+		
+			return deviceList;
+
+		
 
 	}
 	@Override

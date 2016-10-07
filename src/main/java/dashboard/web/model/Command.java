@@ -53,6 +53,7 @@ public class Command {
 			if (m >= this.MIN_MODE && m <= this.MAX_MODE) {
 
 				this.mode = m;
+				
 			} else {
 
 				error = true;

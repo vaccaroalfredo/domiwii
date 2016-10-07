@@ -19,6 +19,7 @@ public interface SchedulerDao {
     //public List<Note> getNotes(String owner, Date startdate,Date enddate,Boolean hightlights,Boolean archive);
     public boolean deleteScheduler(Long idScheduler);
 	public Action getWaitingActionByDeviceID(String idDevice);
+	public List<Scheduler> getAllScheduledAction();
     
 
 }

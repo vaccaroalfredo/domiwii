@@ -41,7 +41,7 @@ public class SchedulerDaoImpl extends AbstractDao<Scheduler> implements Schedule
 		try {
 
 			Scheduler actionSceduled = new Scheduler("");
-
+			
 			actionSceduled.setAction(action);
 
 			actionSceduled.setDevice(device);
@@ -142,6 +142,53 @@ public class SchedulerDaoImpl extends AbstractDao<Scheduler> implements Schedule
 	public List<Action> getWaitingActionsByDeviceID(String idDevice) {
 
 		return null;
+	}
+
+	@Override
+	public List<Scheduler> getAllScheduledAction() {
+		
+		
+		List<Scheduler> list = null;
+		Scheduler scheduler = null;
+		Action action = null;
+		try {
+			this.openTransaction(); 
+			org.hibernate.Query q = this.getSession().createQuery("FROM Scheduler s join s.deviceActionId devac order BY  s.creationdate ASC ");
+			//cr.add(Restrictions.eq("state",State.WAITING));
+			//org.hibernate.Query q = this.getSession().createQuery("FROM Scheduler");
+			//cr.createCriteria("scheduler.deviceActionId.device","d");//.add(Restrictions.eq("d.id",Long.valueOf(2)));
+			//cr.add(Restrictions.eq("scheduler",Long.valueOf(2)));
+			//cr.createCriteria("p.idDevice", "deviceActionId", JoinType.INNER_JOIN);
+			//ProjectionList columns = Projections.projectionList().add(Projections.property("device.id"));
+			//cr.createAlias("scheduler.deviceActionId", "daid");
+			
+			//daid.add(Restrictions.eq("id",Long.valueOf(1)));
+		    //cr.createAlias("", "dev");
+		    //cr.setResultTransformer(Criteria.ROOT_ENTITY);
+			//cr.setProjection(columns);		
+		    list = q.list();
+		    
+		    if (list.size()>0) {
+				scheduler= list.get(0); // first available action
+			}
+		 
+		    if (scheduler != null) {
+		    	action =  scheduler.getDeviceActionId().getAction();   
+			}
+		    
+					
+			//return list;
+		} catch (Exception e) {
+			this.closeTransaction(false);
+		} finally {
+			this.closeTransaction(true);
+		}
+		list.size();
+		return list;
+		
+		
+		
+		
 	}
 
 }

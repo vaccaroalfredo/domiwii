@@ -105,6 +105,16 @@ public class SchedulerService {
 //		return new ArrayList<Note>();
 //	}
 	
+	public List<Scheduler> getAllScheduledAction(){
+		
+		SchedulerDao dao = new SchedulerDaoImpl();
+		
+		
+		
+		List<Scheduler> list = dao.getAllScheduledAction();
+		
+		return list;
+	}
  
    
 }

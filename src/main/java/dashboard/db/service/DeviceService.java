@@ -1,5 +1,7 @@
 package dashboard.db.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Service;
@@ -92,6 +94,19 @@ public class DeviceService {
 		
 		if (dev == null) {
 			logger.error("getDeviceByAlias Device"+alias+" not found");
+		}
+		
+		return dev;
+	}
+	public List<Device> getDevicesMetadata(List<String> aliasList){
+		
+		List<Device> dev= null;
+		DeviceDao dao = new DeviceDaoImpl();
+		
+		dev = dao.getDevicesByAlias(aliasList);
+		
+		if (dev == null) {
+			logger.error("getDevicesByAlias Devices not found");
 		}
 		
 		return dev;
