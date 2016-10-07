@@ -26,7 +26,7 @@ public class ServiceController {
 	@RequestMapping(value = "/addDevice", method = RequestMethod.POST)
 	public String addDevice(@RequestBody(required = true) String params) {
 
-		String devId = "adw";
+		String devId = "";
 		String alias = devId;
 		String password = "admin";
 		String temperature = "-1";
@@ -44,12 +44,19 @@ public class ServiceController {
 				devId = params.substring(start);
 			}
 		}
-		alias = devId;
-		Device device = new Device(devId, alias, password, temperature, humidity);
-		DeviceService deviceService = new DeviceService();
-		deviceService.updateDevice(device);
+		
+		if(devId != null && (!devId.equalsIgnoreCase("")) && (!devId.equalsIgnoreCase(" ")) ){
+			
+			alias = devId;
+			Device device = new Device(devId, alias, password, temperature, humidity);
+			DeviceService deviceService = new DeviceService();
+			deviceService.updateDevice(device);
+			return "true";
+		}
+		
+		
 
-		return "true	";
+		return "false";
 
 	}
 
