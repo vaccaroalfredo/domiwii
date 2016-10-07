@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -26,6 +27,7 @@ public class Conditioner implements Serializable {
 	private String model;
 	
 	@Column
+	@Lob
 	@Convert( converter = CodeArrayToStringConverter.class)
 	private CodeList codes;
 	
