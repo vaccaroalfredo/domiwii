@@ -26,8 +26,7 @@ public class Conditioner implements Serializable {
 	@Column(name = "model", unique = true, nullable = false)
 	private String model;
 	
-	@Column
-	@Lob
+	@Column(length=1000000)
 	@Convert( converter = CodeArrayToStringConverter.class)
 	private CodeList codes;
 	
