@@ -188,7 +188,7 @@
 		    			validateData:				function(rowid){}
 		    		}
 		    		initTable(config)
-		    		$('#${gridName}').jqGrid('setCaption', 'Attivit&agrave; in corso');
+		    		$('#${gridName}').jqGrid('setCaption', 'Action Schedulate');
 //  		    		$('#${gridName}').hideCol("creationdate");
 // 		    		$('#${gridName}').hideCol("result");
 // 		    		$('#${gridName}').hideCol("faildescription");
