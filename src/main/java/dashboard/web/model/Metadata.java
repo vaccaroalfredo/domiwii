@@ -12,11 +12,11 @@ public class Metadata implements Serializable{
 	
 	
 	
-	public Metadata(String alias, String temperature, String humdity) {
+	public Metadata(String alias, String temperature, String humidity) {
 		super();
 		this.alias = alias;
 		this.temperature = temperature;
-		this.humidity = humdity;
+		this.humidity = humidity;
 	}
 	
 	public String getAlias() {
