@@ -31,11 +31,11 @@ public class Metadata implements Serializable{
 	public void setTemperature(String temperature) {
 		this.temperature = temperature;
 	}
-	public String getHumdity() {
+	public String getHumidity() {
 		return humidity;
 	}
-	public void setHumdity(String humdity) {
-		this.humidity = humdity;
+	public void setHumidity(String humidity) {
+		this.humidity = humidity;
 	}
 	
 	
