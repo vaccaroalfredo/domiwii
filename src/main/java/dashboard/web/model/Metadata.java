@@ -6,7 +6,7 @@ public class Metadata implements Serializable{
 	
 	private String alias;
 	private String temperature;
-	private String humdity;
+	private String humidity;
 	
 	
 	
@@ -16,7 +16,7 @@ public class Metadata implements Serializable{
 		super();
 		this.alias = alias;
 		this.temperature = temperature;
-		this.humdity = humdity;
+		this.humidity = humdity;
 	}
 	
 	public String getAlias() {
@@ -32,10 +32,10 @@ public class Metadata implements Serializable{
 		this.temperature = temperature;
 	}
 	public String getHumdity() {
-		return humdity;
+		return humidity;
 	}
 	public void setHumdity(String humdity) {
-		this.humdity = humdity;
+		this.humidity = humdity;
 	}
 	
 	
