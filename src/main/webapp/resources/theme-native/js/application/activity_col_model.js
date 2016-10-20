@@ -34,8 +34,8 @@ $.jgrid.extend({
 var createActivityColumnModel=function(monitor){
 	var ismonitor = typeof monitor !== 'undefined' ? monitor : false;
 	var col=[
-     { label: 'Attività n.', name: 'id', key: true, width: 75 ,sorttype: 'int'},  
-     { label: 'Creato',name: 'creationdate',editable: true,edittype:"text",
+     { label: 'Action n.', name: 'id', key: true, width: 75 ,sorttype: 'int'},  
+     { label: 'Creato',name: 'date',editable: true,edittype:"text",
 	        editoptions: {
 	             // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
 	             // use it to place a third party control to customize the toolbar
@@ -50,7 +50,7 @@ var createActivityColumnModel=function(monitor){
 	             }
 	         }
      },
-     {label: 'Stato',name: 'status',editable: true,edittype: "select",
+     {label: 'State',name: 'actionState',editable: true,edittype: "text",
          	editoptions: {
          		value: 		"0:Nuovo;1:In Lavorazione;2:Chiuso",
          		dataEvents: [
@@ -84,7 +84,7 @@ var createActivityColumnModel=function(monitor){
 
     	 }
      },
-     {label: 'Inizio',name: 'startdate',editable:true,edittype:"text",
+     {label: 'Inizio',name: 'date',editable:true,edittype:"text",
          	//editrules: {required: true},
          	editrules:{ required:true, custom:true, custom_func: function(value,colname){
 	         		  	if (value==""){
@@ -152,7 +152,7 @@ var createActivityColumnModel=function(monitor){
 				return cellvalue;
          	}
      },
-     {label: 'Assegnatario ',name: 'owner',editable: true,edittype: "text",
+     {label: 'Device Alias',name: 'deviceAlias',editable: true,edittype: "text",
          	editrules: {required: false},
          	editoptions: {
 	             // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
@@ -178,6 +178,58 @@ var createActivityColumnModel=function(monitor){
 	            	 });
 	             }
          	}
+     },{label: 'Stato',name: 'actionState',editable: true,edittype: "text",
+      	editrules: {required: false},
+     	editoptions: {
+             // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
+             // use it to place a third party control to customize the toolbar
+             dataInit: function (element) {
+            	 $(element).autocomplete({
+                     id: 'AutoComplete',
+                     autoFocus: true,
+                 	 source: function(request, response){
+     						this.xhr = $.ajax({
+     							url: config.autocompleteUser,
+     							type: 'get',
+     							data: request,
+     							dataType: "json",
+     							success: function( data ) {
+     								response( data );
+     							},
+     							error: function(model, response, options) {
+     								response([]);
+     							}
+     						});
+     				}
+            	 });
+             }
+     	}
+     },{label: 'Command',name: 'command',editable: true,edittype: "text",
+      	editrules: {required: false},
+     	editoptions: {
+             // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
+             // use it to place a third party control to customize the toolbar
+             dataInit: function (element) {
+            	 $(element).autocomplete({
+                     id: 'AutoComplete',
+                     autoFocus: true,
+                 	 source: function(request, response){
+     						this.xhr = $.ajax({
+     							url: config.autocompleteUser,
+     							type: 'get',
+     							data: request,
+     							dataType: "json",
+     							success: function( data ) {
+     								response( data );
+     							},
+     							error: function(model, response, options) {
+     								response([]);
+     							}
+     						});
+     				}
+            	 });
+             }
+     	}
      },
      {label: 'Esito',name: 'result',editable: true, //,edittype: "select",
     	 	sorttype: function (cell) {
@@ -244,31 +296,33 @@ var createActivityColumnModel=function(monitor){
      {label : ' ',name:'custom',editable: true,hidden:ismonitor,edittype:'custom',
 	         editoptions:onEditRowTable(),
 	         formatter:createEditCommands()
-     },
-     {label : 'Allarme',name:'alarm',editable: true,hidden:!ismonitor,edittype:'custom',width:60,
-         editoptions:onEditRowTable(),
-         formatter:function (cellvalue, options, rowObject) {
-        			var img='<div id="semaphore'+options.rowId+'\" style="position: relative;text-align:center"><i class="fa fa-circle" aria-hidden="true" style="color:green"></i></div>';
-        					
-        			
-        	        return img
-        		}
-         
      }
+//     ,
+//     {label : 'Allarme',name:'alarm',editable: true,hidden:!ismonitor,edittype:'custom',width:60,
+//         editoptions:onEditRowTable(),
+//         formatter:function (cellvalue, options, rowObject) {
+//        			var img='<div id="semaphore'+options.rowId+'\" style="position: relative;text-align:center"><i class="fa fa-circle" aria-hidden="true" style="color:green"></i></div>';
+//        					
+//        			
+//        	        return img
+//        		}
+//         
+//     }
  ];
 	
  if (monitor==true){
-	 col[0].width=70;
-	 col[1].hidden=true;
-	 col[2].width=150;
-	 col[3].width=140;
-	 col[4].width=140;
-	 col[5].width=400;
-	 col[6].width=300;
-	 col[7].hidden=true;
-	 col[8].hidden=true;
+	 col[0].hidden=true;//.width=70;
+	 col[1].width=80;//.hidden=true;
+	 col[2].hidden=true;//.width=150;
+	 col[3].hidden=true;//.width=140;
+	 col[4].hidden=true;//.width=140;
+	 col[5].hidden=true;//.width=400;
+	 col[6].width=80;
+	 col[7].width=100;
+	 col[8].width=100;
 	 col[9].hidden=true;
-	 
+	 col[10].hidden=true;
+	 col[11].hidden=true;
  }
  return col;
 	
@@ -298,6 +352,8 @@ var createEditCommands=function(){
         return img
 	}
 }
+
+
 function closeStatusRowTable(rowId,grid,result){
 	  lastSelection=rowId;
 	  var config=activeGrid.getActiveGrid(grid.id);

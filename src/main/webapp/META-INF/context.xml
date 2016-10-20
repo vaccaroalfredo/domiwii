@@ -1,6 +1,9 @@
 <Context>
-<!-- To use if jdbc pool is configure in global jndi -->
-<!-- <ResourceLink name="jdbc/MySqlDS" global="jdbc/MySqlDS" type="javax.sql.DataSource"/> -->
-<!-- To use if jdbc pool is in app configuration-->
-	 <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxIdle="10" maxTotal="30" maxWaitMillis="10000" name="jdbc/MySqlDS" password="admin" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/toc" username="root"/>
+	<!-- To use if jdbc pool is configure in global jndi -->
+	<!-- <ResourceLink name="jdbc/MySqlDS" global="jdbc/MySqlDS" type="javax.sql.DataSource"/> -->
+	<!-- To use if jdbc pool is in app configuration -->
+	<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver"
+		maxIdle="10" maxTotal="30" maxWaitMillis="10000" name="jdbc/MySqlDS"
+		password="admin" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/toc"
+		username="root" />
 </Context>
