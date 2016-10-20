@@ -26,6 +26,7 @@ import dashboard.web.context.SpringApplicationContext;
 import dashboard.web.model.ArduinoMessage;
 import dashboard.web.model.BotAction;
 import dashboard.web.model.BotAuthentication;
+import dashboard.web.model.CheckDeviceResponse;
 import dashboard.web.model.Command;
 import dashboard.web.model.ConditionerResponse;
 import dashboard.web.model.DeviceList;
@@ -106,19 +107,26 @@ public class MobileBotController extends LoggerUtils {
 	 * "password": "password" }
 	 */
 	@RequestMapping(value = "/checkDevice", method = RequestMethod.POST)
-	public Response checkDevice(@RequestBody(required = false) BotAuthentication auth) {
+	public CheckDeviceResponse checkDevice(@RequestBody(required = false) BotAuthentication auth) {
 		try {
 			boolean isAuthenticated = false;
 
 			DeviceService deviceService = (DeviceService) SpringApplicationContext.getServiceBean("deviceService");
 
 			isAuthenticated = deviceService.authDevice(auth.getAlias(), auth.getPassword());
+			
+			if(isAuthenticated){
+				
+				Device dev = deviceService.getDeviceByAlias(auth.getAlias());
+				if(dev!= null){
+					return new CheckDeviceResponse(String.valueOf(isAuthenticated), ResponseCode.OK, dev.getTemperature(), dev.getHumidity());
+				}
+			}
 
-			return new Response(String.valueOf(isAuthenticated));
+			return new CheckDeviceResponse(String.valueOf(isAuthenticated),ResponseCode.KO,"","");
 		} catch (Exception e) {
 
-			return new Response(String.valueOf(false));
-
+			return new CheckDeviceResponse(String.valueOf(false),ResponseCode.KO,"","");
 		}
 
 	}
@@ -233,9 +241,7 @@ public class MobileBotController extends LoggerUtils {
 
 		if(deviceUpdated.getAlias()==null || deviceUpdated.getAlias()=="" || deviceUpdated.getAlias()==" "){
 			 return new Response("Alias nullo o vuoto", ResponseCode.KO);
-		}
-
-		
+		}	
 		
 		
 		//	Device device = new Device(devId, alias, password, temperature, humidity);
@@ -255,6 +261,7 @@ public class MobileBotController extends LoggerUtils {
 				return new Response("Password errata, riprovare!", ResponseCode.KO);
 			}
 			
+			
 			if (!deviceUpdated.getAlias().equalsIgnoreCase(deviceUpdated.getNewAlias())) {
 				if(deviceService.getDeviceByAlias(deviceUpdated.getNewAlias()) != null){
 					return new Response("Alias gia presente, inserirne uno nuovo", ResponseCode.KO);
@@ -264,7 +271,10 @@ public class MobileBotController extends LoggerUtils {
 			
 			
 			dev.setAlias(deviceUpdated.getNewAlias());
-			dev.setPassword(deviceUpdated.getNewPassword());
+			if(deviceUpdated.getNewPassword() != null && (!deviceUpdated.getNewPassword().equalsIgnoreCase("")) && (!deviceUpdated.getNewPassword().equalsIgnoreCase(" ") )){
+				dev.setPassword(deviceUpdated.getNewPassword());
+			}
+			
 			Long idDev = deviceService.updateDevice(dev);
 			
 			if (idDev == null) {
