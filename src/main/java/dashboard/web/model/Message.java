@@ -1,8 +1,8 @@
 package dashboard.web.model;
 
+import java.io.Serializable;
 
-
-public class Message{
+public class Message implements Serializable{
 	
 	String message;
 	String deviceid;
@@ -12,6 +12,12 @@ public class Message{
 		this.message = m;
 		this.deviceid=deviceid;
 	}
+	
+	public Message() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getMessage() {
 		return message;
 	}

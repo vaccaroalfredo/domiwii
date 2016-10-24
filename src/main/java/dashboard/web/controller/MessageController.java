@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dashboard.web.model.Message;
 import dashboard.web.model.MessagePlayerVod;
+import dashboard.web.model.ServerMessage;
 
 
 
@@ -35,37 +36,44 @@ public class MessageController {
 		return getMessageById(id);
 	}
 	
-	@RequestMapping(value = "/send", method = RequestMethod.POST,headers="Accept=application/json")
-	public void send(@RequestParam(value="message", defaultValue="") String message, @RequestBody String param) throws JsonParseException, IOException
+	@RequestMapping(value = "/send", method = RequestMethod.POST, headers="Accept=application/json")
+	public ServerMessage send(@RequestParam(value="message", defaultValue="") String message, @RequestBody MessagePlayerVod param)
 	{
-		
-		JsonFactory jsonFactory = new JsonFactory();
-		JsonParser jp = jsonFactory.createParser(param);
-		jp.setCodec(new ObjectMapper());
-		JsonNode jsonNode = jp.readValueAsTree();
-		String deviceid="";
-		
-		if (jsonNode.get("deviceid")!=null)
+		try{
+			
+			String deviceid= param.getDeviceid();
+			
+			
+			
+	
+			if ((deviceid != null && message != null ) && ( message.equalsIgnoreCase("OPEN_PLAYER_VOD") || message.equalsIgnoreCase("OPEN_PLAYER_LINEAR")))
 			{
-			deviceid=jsonNode.get("deviceid").textValue();
+				String programid= param.getProgramid();
+				if (programid!=null)
+				{
+					
+				}
+				String color= param.getColor();
+				if (color!=null)
+				{
+					
+				}	
+				MessagePlayerVod m= new MessagePlayerVod(message,deviceid,programid,color);
+				listOfMessages.add(m);
 			}
-		
-
-		if ( message.equalsIgnoreCase("OPEN_PLAYER_VOD"))
-		{
-			String programid="";
-			if (jsonNode.get("programid")!=null)
+			else
 			{
-				programid=jsonNode.get("programid").textValue();
-			}	
-			MessagePlayerVod m=new MessagePlayerVod(message,deviceid,programid);
-			listOfMessages.add(m);
+				Message m=new Message(message,deviceid);
+				listOfMessages.add(m);
+			}
+			ServerMessage sm = new ServerMessage("Message Sended", "200");
+			return sm;
 		}
-		else
-		{
-			Message m=new Message(message,deviceid);
-			listOfMessages.add(m);
+		catch(Exception e){
+			ServerMessage sm=new ServerMessage("Message Not Sended", "505");
+			return sm;
 		}
+		
 	}
 
 
@@ -79,7 +87,7 @@ public class MessageController {
 				if (message instanceof MessagePlayerVod)
 				{
 					MessagePlayerVod mp=(MessagePlayerVod)message;
-					MessagePlayerVod m=new MessagePlayerVod(mp.getMessage(),mp.getDeviceid(),mp.getProgramid());
+					MessagePlayerVod m=new MessagePlayerVod(mp.getMessage(),mp.getDeviceid(),mp.getProgramid(),mp.getColor());
 				    listOfMessages.remove(message);
 					return m;
 				}
