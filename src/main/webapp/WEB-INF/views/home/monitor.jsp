@@ -64,6 +64,8 @@
 	
 	<c:set var="gridName" scope="page" value="jqMonitorGrid" />
 	<table id="${gridName}"></table>
+	<div id="${gridName}Pager"></div>
+	
 	<%@include file="modal.jsp"%>
 	<script type="text/javascript" src="<c:url value="/resources/js/application/clock.js"/>"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/application/jqgridtable.js"/>"></script>
@@ -87,6 +89,7 @@
 		    				type: "GET",
 		    				contentType: "application/json; charset=utf-8",
 		    				url: '<c:url value="/home/activity/monitorsetting" />',
+		    				
 		    				data: JSON.stringify({
 		    				     timestamp:  new Date().toString()
 		    				    }),
@@ -97,7 +100,7 @@
 		    							config.rowsToShow=data.numberrowstosee;
 		    			
 						  	           	var grid = jQuery('#'+config.gridName);  	           
-						  	           	grid.jqGrid('setGridParam',{rowNum: 	config.rowsToShow ,sortname: 'id', sortorder: "desc" ,datatype:'json',url:'<c:url value="/home/activity/monitor" />'}).trigger('reloadGrid');
+						  	           	grid.jqGrid('setGridParam',{rowNum: 	10 ,sortname: 'id', sortorder: "desc" ,datatype:'json',url:'<c:url value="/home/activity/monitor" />'}).trigger('reloadGrid');
 						  	           	$('#'+config.gridName).closest(".ui-jqgrid").find('.loading').hide();
 					  	           
 		    					}
@@ -115,21 +118,7 @@
 									    				
 									                    $('td[title="In Lavorazione"]').closest("tr").find('td[aria-describedby="${gridName}_alarm"]').find("i").css({color: "yellow"});  
 
-	    											 //$('#${gridName}').css({ background: "#000000" });
-// 	    											 $("tr.jqgrow:odd").css("background","#357CE0");
-// 									    			 $("tr.jqgrow:odd").css("color","#FFFFFF");
-// 									    			 $("tr.jqgrow:even").css("background","#FFFFFF");
-// 									    			 $("tr.jqgrow:even").css("color","#000000");
-									    			 
-									    			 
-									    			// $(".active").css("background","#B5244A");
-//	    											 $('table#jqMonitorGrid.ui-jqgrid-btable.ui-common-table.table.table-bordered').css({ borderCollapse: "inline" });
-// 	    											 $('table#jqMonitorGrid.ui-jqgrid-btable.ui-common-table.table.table-bordered').find("td:not(:first-child)").css({ border: "1px inline black" });
-	    											 
-// 	    											 $('table#jqMonitorGrid.ui-jqgrid-btable.ui-common-table.table.table-bordered').find("tr:not(:first-child)").css({ border: "10px solid black" });
-		    	 		
-// 		    										 $('tbody').find('tr').css({background: "#22AA54"});
-// 								    				 $('td[title="In Lavorazione"]').closest("tr").css({background: "#C6C305"});
+	    											
 									           		 var element=$('td[aria-describedby="${gridName}_startdate"]').filter(function () {
 									           			 if  ( $(this).prop("title")=="") return false;
 									           			
@@ -192,7 +181,7 @@
 //  		    		$('#${gridName}').hideCol("creationdate");
 // 		    		$('#${gridName}').hideCol("result");
 // 		    		$('#${gridName}').hideCol("faildescription");
-					$('#${gridName}').jqGrid('setGridParam',{altRows:false,pager:'',rowNum:${appsettingBean.numberrowstosee}});
+					$('#${gridName}').jqGrid('setGridParam',{altRows:true,pager:'#jqMonitorGridPager',rowNum:10});
 					$('#${gridName}').bind("jqGridBeforeSelectRow", function (e, rowid, orgClickEvent) {
 					   //Make not selectable row
 					    return false;
@@ -203,7 +192,7 @@
 				}
 				
     		});	
-        });
+        });	
     	
     </script>
 
