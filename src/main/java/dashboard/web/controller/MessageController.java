@@ -36,14 +36,18 @@ public class MessageController {
 		return getMessageById(id);
 	}
 	
-	@RequestMapping(value = "/send", method = RequestMethod.POST)
+	@RequestMapping(value = "/send", method = RequestMethod.POST, headers="Accept=application/json")
 	public ServerMessage send(@RequestParam(value="message", defaultValue="") String message, @RequestBody MessagePlayerVod param)
 	{
 		try{
 			
 			String deviceid= param.getDeviceid();
+			
+			
+			
+	
 			if ((deviceid != null && message != null ) && ( message.equalsIgnoreCase("OPEN_PLAYER_VOD") || message.equalsIgnoreCase("OPEN_PLAYER_LINEAR")))
-			{				
+			{
 				String programid= param.getProgramid();
 				if (programid!=null)
 				{

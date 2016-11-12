@@ -215,10 +215,10 @@ public class MobileBotController extends LoggerUtils {
 		param.add(12);
 		param.add(225);
 
-		Code c = new Code(ConditionerCodeMode.COLD_VEL_1, param);
-		Code c1 = new Code(ConditionerCodeMode.HOT_VEL_1, param);
-		Code c2 = new Code(ConditionerCodeMode.COLD_VEL_4, param);
-		Code c3 = new Code(ConditionerCodeMode.STOP, param);
+		Code c = new Code(ConditionerCodeMode.ZERO, param);
+		Code c1 = new Code(ConditionerCodeMode.ONE, param);
+		Code c2 = new Code(ConditionerCodeMode.TWO, param);
+		Code c3 = new Code(ConditionerCodeMode.THREE, param);
 		
 		List<Code> codes = new ArrayList<Code>();
 		codes.add(c);
