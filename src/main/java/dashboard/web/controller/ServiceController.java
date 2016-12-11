@@ -48,7 +48,7 @@ public class ServiceController {
 		if(devId != null && (!devId.equalsIgnoreCase("")) && (!devId.equalsIgnoreCase(" ")) ){
 			
 			alias = devId;
-			Device device = new Device(devId, alias, password, temperature, humidity);
+			Device device = new Device(devId, alias, Device.getPasswordEncrypt(password), temperature, humidity);
 			DeviceService deviceService = new DeviceService();
 			deviceService.updateDevice(device);
 			return "true";
@@ -59,6 +59,8 @@ public class ServiceController {
 		return "false";
 
 	}
+
+	
 
 	@RequestMapping(value = "/getAction", method = RequestMethod.POST)
 	public String getAction(@RequestBody(required = true) String params) {

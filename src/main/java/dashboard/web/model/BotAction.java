@@ -16,9 +16,10 @@ public class BotAction implements Serializable{
 	private String speed;
 	private String confort;
 	private String alias;
+	private String uiid;
 	
 	
-	public BotAction(String mode, String temperature, String speed, String confort,String alias) {
+	public BotAction(String mode, String temperature, String speed, String confort,String alias, String uiid) {
 		super();
 //		this.devId = devId;
 		this.mode = mode;
@@ -26,10 +27,17 @@ public class BotAction implements Serializable{
 		this.speed = speed;
 		this.confort = confort;
 		this.alias = alias;
+		this.uiid=uiid;
 		
 		
 		
 		
+	}
+	public String getUiid() {
+		return uiid;
+	}
+	public void setUiid(String uiid) {
+		this.uiid = uiid;
 	}
 	public String getConfort() {
 		return confort;

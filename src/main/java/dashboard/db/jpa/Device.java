@@ -28,7 +28,7 @@ import dashboard.db.ASDataFormat;
 		 uniqueConstraints = {@UniqueConstraint(columnNames = {"idDevice"})}
 )
 public class Device implements Serializable {
-	
+	@Column(name = "uid", unique = true, nullable = false)
 	private String uid;
 	//
 	//@OneToMany(mappedBy="device")

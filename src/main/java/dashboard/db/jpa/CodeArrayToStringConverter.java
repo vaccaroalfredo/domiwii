@@ -42,8 +42,7 @@ public class CodeArrayToStringConverter implements AttributeConverter<CodeList, 
 	public static String codeJoin(CodeList aArr) {
 
 	    Gson gson = new Gson();
-	    String json = gson.toJson(aArr);
-	    
+	    String json = gson.toJson(aArr);	    
 	    return json;
 	}
 	public static Boolean isBlank(String data) {

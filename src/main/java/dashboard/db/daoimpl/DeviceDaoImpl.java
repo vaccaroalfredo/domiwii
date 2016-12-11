@@ -107,6 +107,11 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 
 		Device device = this.getDeviceByAlias(alias);
 		//String pass=device.getPasswordEncrypt();
+		if(device == null){
+			
+			device = this.getDeviceByUid(alias);
+			
+		}
 		if (device != null && device.getPassword().equalsIgnoreCase( Device.getPasswordEncrypt(password))) {
 
 			return true;
@@ -115,6 +120,7 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 
 		return false;
 	}
+	
 	@Override
 	public Device getDeviceByAlias(String alias) {
 
@@ -170,7 +176,7 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 				dev.setAlias(device.getAlias());
 				dev.setUid(device.getUid());
 				dev.setPassword(device.getPassword());
-				dev.setPasswordEncrypt();				
+				//dev.setPasswordEncrypt();				
 				this.saveOrUpdate(dev);
 				id = dev.getId();
 			

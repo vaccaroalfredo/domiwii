@@ -7,18 +7,28 @@ public class Metadata implements Serializable{
 	private String alias;
 	private String temperature;
 	private String humidity;
+	private String uiid;
 	
 	
 	
 	
 	
-	public Metadata(String alias, String temperature, String humidity) {
+	public Metadata(String uiid, String alias, String temperature, String humidity) {
 		super();
 		this.alias = alias;
 		this.temperature = temperature;
 		this.humidity = humidity;
+		this.uiid= uiid;
 	}
 	
+	public String getUiid() {
+		return uiid;
+	}
+
+	public void setUiid(String uiid) {
+		this.uiid = uiid;
+	}
+
 	public String getAlias() {
 		return alias;
 	}

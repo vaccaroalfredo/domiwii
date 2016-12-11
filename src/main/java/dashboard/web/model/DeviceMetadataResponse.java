@@ -26,7 +26,7 @@ public class DeviceMetadataResponse implements Serializable {
 		
 		for (Device device : devices) {
 			
-			this.response.add(new Metadata(device.getAlias(), device.getTemperature(), device.getHumidity()));
+			this.response.add(new Metadata(device.getUid(),device.getAlias(), device.getTemperature(), device.getHumidity()));
 			
 		}
 	}

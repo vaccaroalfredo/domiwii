@@ -35,7 +35,7 @@ import org.hibernate.annotations.GenerationTime;
 		joinColumns = @JoinColumn(name = "idAction")),
 	@AssociationOverride(name = "deviceActionId.device",
 		joinColumns = @JoinColumn(name = "idDevice")) })
-public class Scheduler {
+public class Scheduler implements Serializable {
 	
 	private String name;
 	
@@ -112,10 +112,6 @@ public class Scheduler {
 	}
 
 
-
-	
-	
-	
 
 //	@Transient
 //	public Action getAction(){

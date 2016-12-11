@@ -56,11 +56,15 @@ public class MobileBotController extends LoggerUtils {
 		// String command = params.getMode() + "" + params.getTemperature() + ""
 		// + params.getSpeed();// +""+params.getConfort();
 		String devAlias = act.getAlias();
-		if (devAlias == null || devAlias.equalsIgnoreCase("")) {
+		String uiid = act.getUiid();
+		
+		if ((devAlias == null || devAlias.equalsIgnoreCase("")) && (uiid == null || uiid.equalsIgnoreCase("")) ) {
 
 			return new Response(String.valueOf(false));
 
 		}
+		
+		
 
 		Command commandObj = new Command();
 
@@ -85,6 +89,13 @@ public class MobileBotController extends LoggerUtils {
 
 		Device dev = ds.getDeviceByAlias(devAlias);
 
+		if (dev == null) {
+			
+			dev = ds.getDeviceByUid(uiid);
+			
+		}
+		
+		
 		if (dev == null) {
 
 			return new Response(String.valueOf(false));
@@ -118,6 +129,11 @@ public class MobileBotController extends LoggerUtils {
 			if(isAuthenticated){
 				
 				Device dev = deviceService.getDeviceByAlias(auth.getAlias());
+				if (dev== null){
+					dev = deviceService.getDeviceByUid(auth.getAlias());
+					
+				}
+				
 				if(dev!= null){
 					return new CheckDeviceResponse(String.valueOf(isAuthenticated), ResponseCode.OK, dev.getTemperature(), dev.getHumidity());
 				}
@@ -257,7 +273,7 @@ public class MobileBotController extends LoggerUtils {
 				return new Response("Password Vuota!", ResponseCode.KO);
 			}
 			
-			if (!dev.getPassword().equalsIgnoreCase(dev.getPasswordEncrypt(deviceUpdated.getPassword()))) {
+			if (!dev.getPassword().equalsIgnoreCase(Device.getPasswordEncrypt(deviceUpdated.getPassword()))) {
 				return new Response("Password errata, riprovare!", ResponseCode.KO);
 			}
 			
@@ -272,7 +288,7 @@ public class MobileBotController extends LoggerUtils {
 			
 			dev.setAlias(deviceUpdated.getNewAlias());
 			if(deviceUpdated.getNewPassword() != null && (!deviceUpdated.getNewPassword().equalsIgnoreCase("")) && (!deviceUpdated.getNewPassword().equalsIgnoreCase(" ") )){
-				dev.setPassword(deviceUpdated.getNewPassword());
+				dev.setPassword(Device.getPasswordEncrypt(deviceUpdated.getNewPassword()));
 			}
 			
 			Long idDev = deviceService.updateDevice(dev);
@@ -284,6 +300,56 @@ public class MobileBotController extends LoggerUtils {
 			return new Response("Device Modificato correttamente", ResponseCode.OK);
 		
 		
+		
+
+	}
+	@RequestMapping(value = "/resetDevice", method = RequestMethod.POST)
+	public Response resetDevice(@RequestBody(required = true) UpdateDeviceModel deviceUpdated) {
+
+		String devId = "";
+		String alias = devId;
+		String password = "admin";
+		String temperature = "-1";
+		String humidity = "-1";
+
+		
+		
+		if(deviceUpdated.getAlias()==null || deviceUpdated.getAlias()=="" || deviceUpdated.getAlias()==" "){
+			 return new Response("Alias nullo o vuoto", ResponseCode.KO);
+		}
+		
+		if (deviceUpdated.getPassword()== null ||deviceUpdated.getPassword()== "" || deviceUpdated.getPassword()== " " ) {
+			return new Response("Password Vuota!", ResponseCode.KO);
+		}
+		
+		
+		DeviceService deviceService = new DeviceService();
+		Device dev = deviceService.getDeviceByAlias(deviceUpdated.getAlias());
+		
+		if(dev== null){
+			dev = deviceService.getDeviceByUid(deviceUpdated.getAlias());
+		}
+		
+		if(dev == null){
+			return new Response("Device non Trovato", ResponseCode.KO);
+		}
+		
+		String receivedPassword =  Device.getPasswordEncrypt(deviceUpdated.getPassword());
+		if (!dev.getPassword().equalsIgnoreCase(Device.getPasswordEncrypt(deviceUpdated.getPassword()))) {
+			return new Response("Password errata, riprovare!", ResponseCode.KO);
+		}
+		
+		
+		dev.setAlias(dev.getUid());
+		dev.setPassword(password);
+		dev.setTemperature(temperature);
+		dev.setHumidity(humidity);
+		
+		deviceService.updateDevice(dev);
+			
+		
+		return new Response("Device Resettato correttamente", ResponseCode.OK);
+
 		
 
 	}

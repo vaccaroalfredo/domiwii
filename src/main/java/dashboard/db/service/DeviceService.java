@@ -98,6 +98,25 @@ public class DeviceService {
 		
 		return dev;
 	}
+	
+	
+	public Device getDeviceByUid(String uid){
+		
+		
+		Device dev= null;
+		DeviceDao dao = new DeviceDaoImpl();
+		
+		dev = dao.getDeviceByUid(uid);
+		
+		if (dev == null) {
+			logger.error("getDeviceByUid Device"+uid+" not found");
+		}
+		
+		return dev;
+		
+		
+	}
+	
 	public List<Device> getDevicesMetadata(List<String> aliasList){
 		
 		List<Device> dev= null;
