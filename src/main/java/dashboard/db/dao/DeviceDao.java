@@ -17,6 +17,7 @@ public interface DeviceDao {
 	public Long updateDevice(Device device);
 	public boolean updateDeviceMetadata(String iddevice, String temperature, String humidity);
 	List<Device> getDevicesByAlias(List<String> alias);
+	List<Device> getDevicesByUid(List<String> uid);
 	
 
 }

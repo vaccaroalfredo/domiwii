@@ -117,12 +117,12 @@ public class DeviceService {
 		
 	}
 	
-	public List<Device> getDevicesMetadata(List<String> aliasList){
+	public List<Device> getDevicesMetadata(List<String> uiid){
 		
 		List<Device> dev= null;
 		DeviceDao dao = new DeviceDaoImpl();
 		
-		dev = dao.getDevicesByAlias(aliasList);
+		dev = dao.getDevicesByUid(uiid);
 		
 		if (dev == null) {
 			logger.error("getDevicesByAlias Devices not found");

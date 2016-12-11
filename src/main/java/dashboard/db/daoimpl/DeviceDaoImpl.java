@@ -161,6 +161,24 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 
 	}
 	@Override
+	public List<Device> getDevicesByUid(List<String> uid) {
+
+		List<Device> deviceList = null;
+		this.openTransaction();
+		Criteria cr = this.getSession().createCriteria(Device.class);
+		// cr = cr.setProjection(Projections.property("alias"));
+		cr = cr.add(Restrictions.in("uid", uid));
+		deviceList = cr.list();
+
+		this.closeTransaction(true);
+
+		
+			return deviceList;
+
+		
+
+	}
+	@Override
 	public Long updateDevice(Device device) {
 
 		Long id = new Long(-1);
