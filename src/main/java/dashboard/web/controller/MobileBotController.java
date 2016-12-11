@@ -87,9 +87,15 @@ public class MobileBotController extends LoggerUtils {
 
 		DeviceService ds = (DeviceService) SpringApplicationContext.getServiceBean("deviceService");
 
-		Device dev = ds.getDeviceByAlias(devAlias);
+		
+		Device dev = null;
+		
+		if(devAlias != null){
+			dev = ds.getDeviceByAlias(devAlias);
+		}
+		
 
-		if (dev == null) {
+		if (dev == null && uiid != null && !uiid.equalsIgnoreCase("")) {
 			
 			dev = ds.getDeviceByUid(uiid);
 			
