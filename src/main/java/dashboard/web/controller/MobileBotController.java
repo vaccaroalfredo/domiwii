@@ -347,7 +347,7 @@ public class MobileBotController extends LoggerUtils {
 		
 		
 		dev.setAlias(dev.getUid());
-		dev.setPassword(password);
+		dev.setPassword(Device.getPasswordEncrypt(password));
 		dev.setTemperature(temperature);
 		dev.setHumidity(humidity);
 		
