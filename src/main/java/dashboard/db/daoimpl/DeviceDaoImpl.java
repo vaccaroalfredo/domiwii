@@ -23,7 +23,7 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 
 			this.openTransaction();
 
-			device.setPasswordEncrypt();
+			//device.setPasswordEncrypt();
 
 			this.save(device);
 
