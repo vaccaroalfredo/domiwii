@@ -152,6 +152,39 @@ public class MobileBotController extends LoggerUtils {
 		}
 
 	}
+	@RequestMapping(value = "/checkDeviceByUid", method = RequestMethod.POST)
+	public CheckDeviceResponse checkDeviceByUid(@RequestBody(required = false) BotAuthentication auth) {
+		try {
+			boolean isAuthenticated = false;
+
+			DeviceService deviceService = (DeviceService) SpringApplicationContext.getServiceBean("deviceService");
+
+			isAuthenticated = deviceService.authDevice(auth.getUid(), auth.getPassword());
+			
+			if(isAuthenticated){
+				
+				if(auth.getUid()==null){
+					return new CheckDeviceResponse("uid non valorizzato",ResponseCode.KO,"","");
+				}
+				
+				Device dev = deviceService.getDeviceByUid(auth.getUid());
+				if (dev== null){
+					
+					return new CheckDeviceResponse(String.valueOf(isAuthenticated),ResponseCode.KO,"","");
+				}
+				
+				
+					return new CheckDeviceResponse(String.valueOf(isAuthenticated), ResponseCode.OK, dev.getTemperature(), dev.getHumidity());
+			
+			}
+
+			return new CheckDeviceResponse(String.valueOf(isAuthenticated),ResponseCode.KO,"","");
+		} catch (Exception e) {
+
+			return new CheckDeviceResponse(String.valueOf(false),ResponseCode.KO,"","");
+		}
+
+	}
 
 	/*
 	 * 

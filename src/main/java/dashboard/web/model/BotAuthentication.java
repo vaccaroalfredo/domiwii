@@ -14,12 +14,14 @@ public class BotAuthentication implements Serializable{
 	
 	private String alias;
 	private String password;
+	private String uid;
 	
 	
-	public BotAuthentication(String alias, String password) {
+	public BotAuthentication(String alias, String password, String uid) {
 		super();
 		this.alias = alias;
 		this.password = password;
+		this.uid=uid;
 	}
 	
 	public BotAuthentication(){
@@ -42,6 +44,14 @@ public class BotAuthentication implements Serializable{
 	}
 	public static String getPasswordEncrypt(String password){
 		return ASDataFormat.sha256(password);
+	}
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 	
 	
