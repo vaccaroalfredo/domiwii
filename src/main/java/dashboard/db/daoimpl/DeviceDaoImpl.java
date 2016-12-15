@@ -120,6 +120,24 @@ public class DeviceDaoImpl extends AbstractDao<Device> implements DeviceDao {
 
 		return false;
 	}
+	@Override
+	public boolean authDeviceByUid(String uid, String password) {
+
+		Device device = this.getDeviceByUid(uid);
+		//String pass=device.getPasswordEncrypt();
+		if(device == null){
+			
+			return false;
+			
+		}
+		if (device != null && device.getPassword().equalsIgnoreCase( Device.getPasswordEncrypt(password))) {
+
+			return true;
+
+		}
+
+		return false;
+	}
 	
 	@Override
 	public Device getDeviceByAlias(String alias) {

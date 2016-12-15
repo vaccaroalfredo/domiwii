@@ -13,6 +13,7 @@ public interface DeviceDao {
 	public boolean existDeviceByAlias(String alias);
 	public boolean deleteDevice(String uid);
 	public boolean authDevice(String alias, String password);
+	public boolean authDeviceByUid(String uid, String password);
 	public Device getDeviceByAlias(String alias);
 	public Long updateDevice(Device device);
 	public boolean updateDeviceMetadata(String iddevice, String temperature, String humidity);

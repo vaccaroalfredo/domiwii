@@ -159,7 +159,7 @@ public class MobileBotController extends LoggerUtils {
 
 			DeviceService deviceService = (DeviceService) SpringApplicationContext.getServiceBean("deviceService");
 
-			isAuthenticated = deviceService.authDevice(auth.getUid(), auth.getPassword());
+			isAuthenticated = deviceService.authDeviceByUid(auth.getUid(), auth.getPassword());
 			
 			if(isAuthenticated){
 				
