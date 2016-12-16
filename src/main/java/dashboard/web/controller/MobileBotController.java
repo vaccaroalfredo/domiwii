@@ -238,56 +238,46 @@ public class MobileBotController extends LoggerUtils {
 	}
 
 	@RequestMapping(value = "/addConditioner", method = RequestMethod.POST)
-	public Response addConditioner() {
+	public Response addConditioner(@RequestBody(required = true) Conditioner conditioner) {
 
 		this.debugMessage(logger, "addBotAction");
 
 		// String command = params.getMode() + "" + params.getTemperature() + ""
 		// + params.getSpeed();// +""+params.getConfort();
-		List<Integer> param = new ArrayList<Integer>();
-		param.add(9000);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-		param.add(9000);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-		param.add(9000);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-		param.add(12);
-		param.add(225);
-
-		Code c = new Code(ConditionerCodeMode.ZERO, param);
-		Code c1 = new Code(ConditionerCodeMode.ONE, param);
-		Code c2 = new Code(ConditionerCodeMode.TWO, param);
-		Code c3 = new Code(ConditionerCodeMode.THREE, param);
-		
-		List<Code> codes = new ArrayList<Code>();
-		codes.add(c);
-		codes.add(c1);
-		codes.add(c2);
-		codes.add(c3);
-
-		CodeList codeList = new CodeList(codes);
-
-		Conditioner cond = new Conditioner("cond", "Model" + (Math.random() * 100), codeList);
+	
+				
+		//Conditioner("cond", "Model" + (Math.random() * 100), codeList);
 
 		ConditionerService cs = (ConditionerService) SpringApplicationContext.getServiceBean("conditionerService");
 
-		cs.addConditioner(cond);
+		cs.addConditioner(conditioner);
+		
+		
+		
+
+		return new Response(String.valueOf(true), ResponseCode.OK);// +params.getId();
+	}
+	
+	@RequestMapping(value = "/addConditionerList", method = RequestMethod.POST)
+	public Response addConditionerList(@RequestBody(required = true) ConditionerResponse cr) {
+
+		this.debugMessage(logger, "addBotAction");
+
+		// String command = params.getMode() + "" + params.getTemperature() + ""
+		// + params.getSpeed();// +""+params.getConfort();
+		List<Conditioner> conds= cr.getResponse();
+		
+		
+		
+		//Conditioner("cond", "Model" + (Math.random() * 100), codeList);
+
+		ConditionerService cs = (ConditionerService) SpringApplicationContext.getServiceBean("conditionerService");
+
+		for (Conditioner conditioner : conds) {
+			cs.addConditioner(conditioner);
+		}
+		
+		
 
 		return new Response(String.valueOf(true), ResponseCode.OK);// +params.getId();
 	}
