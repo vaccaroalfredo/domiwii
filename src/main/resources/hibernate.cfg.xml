@@ -10,10 +10,10 @@
 	<property name="format_sql">true</property>
 	<property name="use_sql_comments">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hibernate.connection.url">jdbc:mysql://domiwii-db:3306/dmautomation?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://62.149.150.200:3306/Sql837527_5?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.username">user2V2</property>
-    <property name="hibernate.connection.password">8RwieC7UNbdfEDhw</property>
+    <property name="hibernate.connection.username">Sql837527</property>
+    <property name="hibernate.connection.password">13nr3kv587</property>
     <property name="hibernate.connection.pool_size">100</property>
     <property name="hibernate.connection.autocommit">true</property>
     <property name="hibernate.connection.autoReconnect">true</property>
