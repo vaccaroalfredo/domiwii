@@ -10,16 +10,16 @@
 	<property name="format_sql">true</property>
 	<property name="use_sql_comments">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hibernate.connection.url">jdbc:mysql://127.2.27.2:3306/dmautomation?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://domiwii-db:3306/dmautomation?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.username">adminLe6GkQv</property>
-    <property name="hibernate.connection.password">KNVshyM2d_RL</property>
+    <property name="hibernate.connection.username">user0BO</property>
+    <property name="hibernate.connection.password">MRVqBYXoi7QXB2gQ</property>
     <property name="hibernate.connection.pool_size">100</property>
     <property name="hibernate.connection.autocommit">true</property>
     <property name="hibernate.connection.autoReconnect">true</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.format_sql">true</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
     <mapping class="netcom.dashboard.db.jpa.*" />
   </session-factory> 
   
