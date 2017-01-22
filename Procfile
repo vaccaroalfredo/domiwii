@@ -1,1 +1,1 @@
-web: sh deployements/
+web: sh target/*.war
